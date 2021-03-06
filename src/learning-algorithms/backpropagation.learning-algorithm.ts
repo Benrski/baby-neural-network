@@ -76,7 +76,7 @@ export class BackpropagationLearningAlgorithm implements LearningAlgorithm {
     this.trainingIndex = 0;
     const oldWeights: number[][][] = [];
     const deltas: number[][] = [];
-    while (this.epoch < this.maxEpoch) {
+    while (this.trainingInputs.length > 0 && this.epoch < this.maxEpoch) {
       this.neuralNetwork.setInputs(this.trainingInputs[this.trainingIndex]);
       this.neuralNetwork.calculate(true);
       let currentLayer = this.neuralNetwork.getOutputLayer();

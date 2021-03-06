@@ -120,11 +120,10 @@ export class Neuron {
   }
 
   public calculate(derivative: boolean = false): void {
-    let outputBeforeActivation = 0;
+    let outputBeforeActivation = this.bias * this.biasWeight;
     for (let i = 0; i < this.inputsCount; i++) {
       outputBeforeActivation += this.inputs[i] * this.weights[i];
     }
-    outputBeforeActivation += this.bias * this.biasWeight;
     this.output = this.activationFunction.output(outputBeforeActivation);
     if (derivative) {
       this.outputDerivative = this.activationFunction.derivative(
