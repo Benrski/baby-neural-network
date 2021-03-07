@@ -155,9 +155,9 @@ export class NeuralNetwork {
     // Cloning input layer
     for (let n = 0; n < this.inputLayer.getNeuronsCount(); n++) {
       const neuronToCopy = this.inputLayer.getNeuron(n);
-      const weightsToCopy = neuronToCopy.getWeights().splice(0);
+      const weightsToCopy = neuronToCopy.getWeights();
       const neuron = neuralNetwork.inputLayer.getNeuron(n);
-      neuron.setWeights(weightsToCopy);
+      neuron.setWeights([...weightsToCopy]);
       neuron.setBiasWeight(neuronToCopy.getBiasWeight());
     }
 
@@ -166,9 +166,9 @@ export class NeuralNetwork {
       const layerToCopy = this.hiddenLayers[l];
       for (let n = 0; n < layerToCopy.getNeuronsCount(); n++) {
         const neuronToCopy = layerToCopy.getNeuron(n);
-        const weightsToCopy = neuronToCopy.getWeights().splice(0);
+        const weightsToCopy = neuronToCopy.getWeights();
         const neuron = neuralNetwork.hiddenLayers[l].getNeuron(n);
-        neuron.setWeights(weightsToCopy);
+        neuron.setWeights([...weightsToCopy]);
         neuron.setBiasWeight(neuronToCopy.getBiasWeight());
       }
     }
@@ -176,9 +176,9 @@ export class NeuralNetwork {
     // Cloning output layer
     for (let n = 0; n < this.outputLayer.getNeuronsCount(); n++) {
       const neuronToCopy = this.outputLayer.getNeuron(n);
-      const weightsToCopy = neuronToCopy.getWeights().splice(0);
+      const weightsToCopy = neuronToCopy.getWeights();
       const neuron = neuralNetwork.outputLayer.getNeuron(n);
-      neuron.setWeights(weightsToCopy);
+      neuron.setWeights([...weightsToCopy]);
       neuron.setBiasWeight(neuronToCopy.getBiasWeight());
     }
 
