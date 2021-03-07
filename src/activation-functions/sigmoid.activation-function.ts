@@ -23,4 +23,8 @@ export class SigmoidActivationFunction implements ActivationFunction {
     const output = this.output(x);
     return output * (1 - output);
   }
+
+  public clone(): ActivationFunction {
+    return new SigmoidActivationFunction(this.a);
+  }
 }

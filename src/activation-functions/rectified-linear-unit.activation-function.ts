@@ -23,4 +23,8 @@ export class RectifiedLinearUnitActivationFunction
   public derivative(x: number): number {
     return x <= 0 ? 0 : this.a;
   }
+
+  public clone(): ActivationFunction {
+    return new RectifiedLinearUnitActivationFunction(this.a);
+  }
 }

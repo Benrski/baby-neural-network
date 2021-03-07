@@ -22,4 +22,8 @@ export class LinearActivationFunction implements ActivationFunction {
   public derivative(x: number): number {
     return this.a;
   }
+
+  public clone(): ActivationFunction {
+    return new LinearActivationFunction(this.a);
+  }
 }

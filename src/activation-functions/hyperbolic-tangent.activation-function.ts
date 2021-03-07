@@ -23,4 +23,8 @@ export class HyperbolicTangentActivationFunction implements ActivationFunction {
   public derivative(x: number): number {
     return 1 - Math.pow(this.output(x), 2);
   }
+
+  public clone(): ActivationFunction {
+    return new HyperbolicTangentActivationFunction(this.a);
+  }
 }
