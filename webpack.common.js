@@ -3,6 +3,7 @@ const path = require("path");
 
 module.exports = {
   entry: "./src/baby-neural-network.ts",
+  devtool: "inline-source-map",
   module: {
     rules: [
       {
