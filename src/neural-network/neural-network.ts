@@ -4,15 +4,16 @@ import { InputLayer } from "./layers/input.layer";
 import { Layer } from "./layers/layer";
 import { OutputLayer } from "./layers/output.layer";
 
+interface HiddenOptions {
+  hiddenFunction: ActivationFunction;
+  neuronsCount: number;
+}
+
 export interface NeuralNetworkOptions {
   inputsCount: number;
-  hiddenOptions?: Array<{
-    hiddenFunction: ActivationFunction;
-    neuronsCount: number;
-  }>;
+  hiddenOptions?: Array<HiddenOptions>;
   outputFunction: ActivationFunction;
   outputsCount: number;
-  initialize?: boolean;
 }
 
 export class NeuralNetwork {
@@ -29,7 +30,6 @@ export class NeuralNetwork {
     hiddenOptions,
     outputFunction,
     outputsCount,
-    initialize = true,
   }: NeuralNetworkOptions) {
     this.inputsCount = inputsCount;
     const inputLayer = new InputLayer({
@@ -60,9 +60,7 @@ export class NeuralNetwork {
     });
     outputLayer.setPreviousLayer(previousLayer);
     this.outputLayer = outputLayer;
-    if (initialize) {
-      this.initialize();
-    }
+    this.initialize();
   }
 
   public initialize() {
@@ -100,7 +98,7 @@ export class NeuralNetwork {
   }
 
   public setInput(input: number, index: number): void {
-    this.inputs[index] = input;
+    this.inputs[index + 1] = input;
   }
 
   public getInput(index: number): number {
@@ -131,5 +129,59 @@ export class NeuralNetwork {
       nextLayer = currentLayer.getNextLayer();
     }
     this.outputs = currentLayer.getOutputs();
+  }
+
+  public clone(): NeuralNetwork {
+    // Cloning hidden layers and neural network options
+    let hiddenOptions: Array<HiddenOptions> | undefined;
+    if (this.hiddenLayers.length > 0) {
+      hiddenOptions = [];
+      for (const hiddenLayer of this.hiddenLayers) {
+        const neuronsCount = hiddenLayer.getNeuronsCount();
+        const hiddenFunction = hiddenLayer.getActivationFunction().clone();
+        hiddenOptions.push({ neuronsCount, hiddenFunction });
+      }
+    }
+    const options: NeuralNetworkOptions = {
+      inputsCount: this.inputsCount,
+      outputsCount: this.outputsCount,
+      hiddenOptions: hiddenOptions,
+      outputFunction: this.outputLayer.getActivationFunction().clone(),
+    };
+
+    // Initializing neural network structure
+    const neuralNetwork = new NeuralNetwork(options);
+
+    // Cloning input layer
+    for (let n = 0; n < this.inputLayer.getNeuronsCount(); n++) {
+      const neuronToCopy = this.inputLayer.getNeuron(n);
+      const weightsToCopy = neuronToCopy.getWeights().splice(0);
+      const neuron = neuralNetwork.inputLayer.getNeuron(n);
+      neuron.setWeights(weightsToCopy);
+      neuron.setBiasWeight(neuronToCopy.getBiasWeight());
+    }
+
+    // Cloning hidden layers
+    for (let l = 0; l < this.hiddenLayers.length; l++) {
+      const layerToCopy = this.hiddenLayers[l];
+      for (let n = 0; n < layerToCopy.getNeuronsCount(); n++) {
+        const neuronToCopy = layerToCopy.getNeuron(n);
+        const weightsToCopy = neuronToCopy.getWeights().splice(0);
+        const neuron = neuralNetwork.hiddenLayers[l].getNeuron(n);
+        neuron.setWeights(weightsToCopy);
+        neuron.setBiasWeight(neuronToCopy.getBiasWeight());
+      }
+    }
+
+    // Cloning output layer
+    for (let n = 0; n < this.outputLayer.getNeuronsCount(); n++) {
+      const neuronToCopy = this.outputLayer.getNeuron(n);
+      const weightsToCopy = neuronToCopy.getWeights().splice(0);
+      const neuron = neuralNetwork.outputLayer.getNeuron(n);
+      neuron.setWeights(weightsToCopy);
+      neuron.setBiasWeight(neuronToCopy.getBiasWeight());
+    }
+
+    return neuralNetwork;
   }
 }
