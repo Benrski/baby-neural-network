@@ -1,7 +1,7 @@
 {
   "name": "baby-neural-network",
   "version": "0.1.0",
-  "description": "Neural Network",
+  "description": "Simple neural network",
   "license": "MIT",
   "author": "Benrski",
   "main": "dist/baby-neural-network.js",
