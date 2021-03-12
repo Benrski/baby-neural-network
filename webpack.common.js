@@ -14,7 +14,7 @@ module.exports = {
   },
   output: {
     filename: "baby-neural-network.js",
-    library: "BNN",
+    library: "BabyNeuralNetwork",
     path: path.resolve(__dirname, "dist"),
   },
   plugins: [new CleanWebpackPlugin()],
