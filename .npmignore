@@ -1,5 +1,3 @@
-.DS_Store
-.git
 src
 tsconfig.json
 webpack.common.js
