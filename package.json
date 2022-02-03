@@ -1,34 +1,13 @@
 {
   "name": "baby-neural-network",
-  "version": "1.0.0",
-  "description": "Simple neural network",
-  "license": "MIT",
-  "author": "Benrski",
-  "main": "dist/baby-neural-network.js",
-  "types": "dist/baby-neural-network.d.ts",
-  "files": [
-    "dist"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Benrski/baby-neural-network.git"
-  },
+  "version": "0.0.0",
   "scripts": {
-    "start": "tsc && webpack --config webpack.dev.js",
-    "build": "tsc && webpack --config webpack.prod.js",
-    "prepublishOnly": "yarn run build"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "@tsconfig/recommended": "^1.0.1",
-    "@types/typescript": "^2.0.0",
-    "@types/webpack": "^4.41.26",
-    "clean-webpack-plugin": "^3.0.0",
-    "eslint": "^7.21.0",
-    "prettier": "^2.2.1",
-    "ts-loader": "^8.0.17",
-    "typescript": "^4.2.3",
-    "webpack": "^5.24.3",
-    "webpack-cli": "^4.5.0",
-    "webpack-merge": "^5.7.3"
+    "typescript": "^4.4.4",
+    "vite": "^2.7.2"
   }
 }
