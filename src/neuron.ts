@@ -57,5 +57,5 @@ export const updateOutput = (neuron: Neuron): Neuron => {
     bias
   );
   const output = activation.activate(outputBeforeActivation);
-  return { ...neuron, output };
+  return setOutput(neuron, output);
 };
