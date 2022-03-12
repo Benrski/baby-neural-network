@@ -9,6 +9,10 @@ export enum ActivationFunctionType {
   SIGMOID = 'SIGMOID',
   TANH = 'TANH',
 }
+export type ActivationFunctions = Record<
+  ActivationFunctionType,
+  ActivationFunction
+>;
 
 export const LINEAR: ActivationFunction = {
   activate: (x) => x,
@@ -45,10 +49,7 @@ export const TANH: ActivationFunction = {
   },
 };
 
-export const ACTIVATION_FUNCTIONS: Record<
-  ActivationFunctionType,
-  ActivationFunction
-> = {
+export const ACTIVATION_FUNCTIONS: ActivationFunctions = {
   LINEAR,
   RELU,
   SIGMOID,
