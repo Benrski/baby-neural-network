@@ -9,6 +9,7 @@ export enum ActivationFunctionType {
   SIGMOID = 'SIGMOID',
   TANH = 'TANH',
 }
+
 export type ActivationFunctions = Record<
   ActivationFunctionType,
   ActivationFunction

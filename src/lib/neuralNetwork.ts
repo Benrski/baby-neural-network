@@ -48,6 +48,7 @@ export const predict = (
         const input =
           updatedNetwork[updatedNetwork.length - 1]?.[linkIndex].output ??
           inputs[linkIndex];
+
         return setLinkInput(link, input);
       });
 
