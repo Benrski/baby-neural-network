@@ -13,11 +13,12 @@ export interface Neuron {
 }
 
 export const newNeuron = (
-  fields: Partial<Neuron> & Pick<Neuron, 'id' | 'activationType'>
+  fields: Partial<Neuron> & Pick<Neuron, 'id'>
 ): Neuron => ({
   links: [],
   bias: 0,
   output: 0,
+  activationType: ActivationFunctionType.LINEAR,
   ...fields,
 });
 
