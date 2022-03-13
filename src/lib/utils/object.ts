@@ -1,11 +1,11 @@
-export const set = <T, K extends keyof T>(
-  object: T,
-  property: K,
-  value: T[K]
-): T => ({
+export const set = <O, P extends keyof O>(
+  object: O,
+  property: P,
+  value: O[P]
+): O => ({
   ...object,
   [property]: value,
 });
 
-export const get = <T, K extends keyof T>(object: T, property: K): T[K] =>
+export const get = <O, P extends keyof O>(object: O, property: P): O[P] =>
   object[property];
