@@ -2,33 +2,33 @@ import {
   ActivationFunctionType,
   ACTIVATION_FUNCTIONS,
 } from './activationFunction';
+import { Link } from './link';
 
 export interface Neuron {
-  inputs: number[];
-  weights: number[];
+  id: string;
+  links: Link[];
   bias: number;
   output: number;
   activationType: ActivationFunctionType;
 }
 
 export const newNeuron = (
-  fields: Partial<Neuron> & Pick<Neuron, 'activationType'>
+  fields: Partial<Neuron> & Pick<Neuron, 'id' | 'activationType'>
 ): Neuron => ({
-  inputs: [],
-  weights: [],
+  links: [],
   bias: 0,
   output: 0,
   ...fields,
 });
 
-export const setInputs = (neuron: Neuron, inputs: number[]): Neuron => ({
+export const setId = (neuron: Neuron, id: string): Neuron => ({
   ...neuron,
-  inputs,
+  id,
 });
 
-export const setWeights = (neuron: Neuron, weights: number[]): Neuron => ({
+export const setLinks = (neuron: Neuron, links: Link[]): Neuron => ({
   ...neuron,
-  weights,
+  links,
 });
 
 export const setBias = (neuron: Neuron, bias: number): Neuron => ({
@@ -49,11 +49,11 @@ export const setActivationType = (
   activationType,
 });
 
-export const updateOutput = (neuron: Neuron): Neuron => {
-  const { bias, inputs, weights, activationType } = neuron;
+export const predict = (neuron: Neuron): Neuron => {
+  const { bias, links, activationType } = neuron;
   const activation = ACTIVATION_FUNCTIONS[activationType];
-  const outputBeforeActivation = weights.reduce(
-    (acc, weight, i) => acc + weight * inputs[i],
+  const outputBeforeActivation = links.reduce(
+    (acc, { input, weight }) => acc + input * weight,
     bias
   );
   const output = activation.activate(outputBeforeActivation);
