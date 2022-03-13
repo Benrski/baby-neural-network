@@ -1,6 +1,6 @@
 import {
-  ActivationFunctions,
   ActivationFunctionType,
+  ACTIVATION_FUNCTIONS,
 } from './activationFunction';
 import { Link } from './link';
 
@@ -49,12 +49,9 @@ export const setActivationType = (
   activationType,
 });
 
-export const predict = (
-  neuron: Neuron,
-  activationFunctions: ActivationFunctions
-): Neuron => {
+export const predict = (neuron: Neuron): Neuron => {
   const { bias, links, activationType } = neuron;
-  const activation = activationFunctions[activationType];
+  const activation = ACTIVATION_FUNCTIONS[activationType];
   const outputBeforeActivation = links.reduce(
     (acc, { input, weight }) => acc + input * weight,
     bias
