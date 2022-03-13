@@ -1,6 +1,6 @@
 import { ActivationFunctionType } from './activationFunction';
-import { random } from './math';
 import { Neuron, newNeuron, predict as neuronPredict } from './neuron';
+import { random } from './utils/math';
 
 export type NeuralNetwork = Neuron[][];
 
