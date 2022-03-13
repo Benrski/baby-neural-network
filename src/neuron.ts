@@ -32,6 +32,11 @@ export const setLinks = (neuron: Neuron, links: Link[]): Neuron => ({
   links,
 });
 
+export const mapLinks = (
+  neuron: Neuron,
+  callback: (value: Link, index: number, array: Link[]) => Link
+): Neuron => setLinks(neuron, neuron.links.map(callback));
+
 export const setBias = (neuron: Neuron, bias: number): Neuron => ({
   ...neuron,
   bias,
