@@ -2,7 +2,7 @@ import {
   ActivationFunctionType,
   ACTIVATION_FUNCTIONS,
 } from './activationFunction';
-import { set } from './utils/record';
+import { set } from './utils/object';
 
 export interface Neuron {
   id: string;
