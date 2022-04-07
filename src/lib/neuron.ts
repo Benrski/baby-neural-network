@@ -2,6 +2,7 @@ import {
   ActivationFunctionType,
   ACTIVATION_FUNCTIONS,
 } from './activationFunction';
+import { set } from './utils/object';
 
 export interface Neuron {
   id: string;
@@ -19,28 +20,19 @@ export const newNeuron = (
   ...fields,
 });
 
-export const setId = (neuron: Neuron, id: string): Neuron => ({
-  ...neuron,
-  id,
-});
+export const setId = (neuron: Neuron, id: string): Neuron =>
+  set(neuron, 'id', id);
 
-export const setWeights = (neuron: Neuron, weights: number[]): Neuron => ({
-  ...neuron,
-  weights,
-});
+export const setWeights = (neuron: Neuron, weights: number[]): Neuron =>
+  set(neuron, 'weights', weights);
 
-export const setBias = (neuron: Neuron, bias: number): Neuron => ({
-  ...neuron,
-  bias,
-});
+export const setBias = (neuron: Neuron, bias: number): Neuron =>
+  set(neuron, 'bias', bias);
 
 export const setActivationType = (
   neuron: Neuron,
   activationType: ActivationFunctionType
-): Neuron => ({
-  ...neuron,
-  activationType,
-});
+): Neuron => set(neuron, 'activationType', activationType);
 
 export const predict = (neuron: Neuron, inputs: number[]): number => {
   const { bias, weights, activationType } = neuron;

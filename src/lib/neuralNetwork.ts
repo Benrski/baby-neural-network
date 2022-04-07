@@ -1,6 +1,6 @@
 import { ActivationFunctionType } from './activationFunction';
-import { random } from './math';
 import { Neuron, newNeuron, predict as neuronPredict } from './neuron';
+import { random } from './utils/math';
 
 export type NeuralNetwork = Neuron[][];
 
@@ -22,9 +22,11 @@ export const newNeuralNetwork = (
 
     return Array.from({ length: neurons }, (_, neuronIndex) => {
       const neuronId = `${layerId}-${neuronIndex + 1}`;
-      const weights = Array.from({ length: weightsCount }, () => random(-1, 1));
+      const weights = Array.from({ length: weightsCount }, () =>
+        random(-0.5, 0.5)
+      );
 
-      return newNeuron({ id: neuronId, weights, bias: 1, activationType });
+      return newNeuron({ id: neuronId, weights, bias: 0.1, activationType });
     });
   });
 };
