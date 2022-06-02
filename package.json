@@ -2,6 +2,17 @@
   "name": "baby-neural-network",
   "version": "2.0.0",
   "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/baby-neural-network.es.js",
+      "require": "./dist/baby-neural-network.umd.js"
+    }
+  },
+  "main": "./dist/baby-neural-network.es.umd.js",
+  "module": "./dist/baby-neural-network.es.es.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc && vite build",
     "dev": "vite",
