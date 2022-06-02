@@ -10,9 +10,7 @@ export type NeuralNetworkOptions = {
   inputs?: number;
 }[];
 
-export const newNeuralNetwork = (
-  options: NeuralNetworkOptions
-): NeuralNetwork => {
+export const newNeuralNetwork = (options: NeuralNetworkOptions): NeuralNetwork => {
   const layersCount = options.length;
 
   return Array.from({ length: layersCount }, (_, layerIndex) => {
@@ -22,25 +20,18 @@ export const newNeuralNetwork = (
 
     return Array.from({ length: neurons }, (_, neuronIndex) => {
       const neuronId = `${layerId}-${neuronIndex + 1}`;
-      const weights = Array.from({ length: weightsCount }, () =>
-        random(-0.5, 0.5)
-      );
+      const weights = Array.from({ length: weightsCount }, () => random(-0.5, 0.5));
 
       return newNeuron({ id: neuronId, weights, bias: 0.1, activationType });
     });
   });
 };
 
-export const predict = (network: NeuralNetwork, inputs: number[]): number[] => {
-  const layersOutputs = network.reduce<number[][]>((layersOutputs, layer) => {
+export const predict = (network: NeuralNetwork, inputs: number[]): number[][] =>
+  network.reduce<number[][]>((layersOutputs, layer) => {
     const layerInputs = layersOutputs[layersOutputs.length - 1] || inputs;
 
-    const layerOutputs = layer.map((neuron) =>
-      neuronPredict(neuron, layerInputs)
-    );
+    const layerOutputs = layer.map((neuron) => neuronPredict(neuron, layerInputs));
 
     return [...layersOutputs, layerOutputs];
   }, []);
-
-  return layersOutputs[layersOutputs.length - 1] || [];
-};

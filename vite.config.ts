@@ -4,9 +4,9 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/lib/index.ts'),
-      name: 'BNN',
-      fileName: (format) => `bnn.${format}.js`,
+      entry: path.resolve(__dirname, 'src/index.ts'),
+      name: 'BabyNeuralNetwork',
+      fileName: (format) => `baby-neural-network.${format}.js`,
     },
   },
 });
